@@ -28,7 +28,9 @@ texture = ExtResource("3_pxwbd")
 [node name="SpotContainer" type="Node2D" parent="."]
 script = ExtResource("4_8qdv8")
 spot_scene = ExtResource("5_pxwbd")
+num_spots = 20
 num_players = 3
+difficulty = 10
 
 [node name="SwarmLauncher" type="Node2D" parent="."]
 z_index = 4

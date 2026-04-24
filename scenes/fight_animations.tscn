@@ -1,5 +1,6 @@
-[gd_scene load_steps=38 format=3 uid="uid://cjwdiat5jm3fh"]
+[gd_scene load_steps=39 format=3 uid="uid://cjwdiat5jm3fh"]
 
+[ext_resource type="Script" uid="uid://cnqdreb4g5wpu" path="res://scenes/scripts/fight_animations.gd" id="0_script"]
 [ext_resource type="Texture2D" uid="uid://dnym8ao3oueqa" path="res://assets/anim/fight01.png" id="1_vaq4e"]
 [ext_resource type="Texture2D" uid="uid://ce4yu8p6qmil" path="res://assets/anim/fight02.png" id="2_gx66v"]
 [ext_resource type="Texture2D" uid="uid://dwed4b4pkooe6" path="res://assets/anim/fight03.png" id="3_piyis"]
@@ -251,32 +252,10 @@ animations = [{
 }]
 
 [node name="FightAnimations" type="Node2D"]
+script = ExtResource("0_script")
+
+[node name="Template" type="AnimatedSprite2D" parent="."]
 visible = false
-
-[node name="Fight" type="AnimatedSprite2D" parent="."]
 z_index = 20
-position = Vector2(-8, 11)
 sprite_frames = SubResource("SpriteFrames_sgyxd")
 animation = &"1"
-frame_progress = 0.688889
-
-[node name="Fight2" type="AnimatedSprite2D" parent="."]
-z_index = 20
-position = Vector2(-2, -9)
-sprite_frames = SubResource("SpriteFrames_sgyxd")
-animation = &"3"
-frame_progress = 0.449298
-
-[node name="Fight3" type="AnimatedSprite2D" parent="."]
-z_index = 20
-position = Vector2(-6, -18)
-sprite_frames = SubResource("SpriteFrames_sgyxd")
-animation = &"2"
-frame_progress = 0.941853
-
-[node name="Fight4" type="AnimatedSprite2D" parent="."]
-z_index = 20
-position = Vector2(-22, -10)
-sprite_frames = SubResource("SpriteFrames_sgyxd")
-animation = &"1"
-frame_progress = 0.0472371

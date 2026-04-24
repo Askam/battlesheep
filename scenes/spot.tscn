@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://oc8x8f1pkyox"]
+[gd_scene load_steps=24 format=3 uid="uid://oc8x8f1pkyox"]
 
 [ext_resource type="Script" uid="uid://dnm8n4kr3jj2k" path="res://scenes/scripts/spot.gd" id="1_f2ny0"]
 [ext_resource type="Texture2D" uid="uid://yyes0hgeyol5" path="res://assets/img/spots/shadow.png" id="1_i2x4l"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://e8rfgfcbd7mi" path="res://assets/img/spots/target.png" id="3_37fjl"]
 [ext_resource type="Texture2D" uid="uid://ctc5ro4uubun3" path="res://assets/img/spots/fences.png" id="3_bhfl7"]
 [ext_resource type="PackedScene" uid="uid://cjwdiat5jm3fh" path="res://scenes/fight_animations.tscn" id="3_hxga3"]
+[ext_resource type="PackedScene" uid="uid://7qox66eer7fc" path="res://scenes/building.tscn" id="4_2djxi"]
+[ext_resource type="PackedScene" uid="uid://p43yeke3f5wm" path="res://scenes/small_building.tscn" id="5_i2x4l"]
 [ext_resource type="Texture2D" uid="uid://g4hruaw32myw" path="res://assets/img/spots/sheep.png" id="12_pkw66"]
 [ext_resource type="Texture2D" uid="uid://cuatuskidgkju" path="res://assets/img/spots/pig.png" id="13_4tkf2"]
 [ext_resource type="Texture2D" uid="uid://tuw7ujn14is8" path="res://assets/img/spots/pinguin.png" id="14_bjmai"]
@@ -54,6 +56,8 @@ size = Vector2(74, 82)
 script = ExtResource("1_f2ny0")
 unit_scene = ExtResource("2_bhfl7")
 fight_animation = ExtResource("3_hxga3")
+building_scene = ExtResource("4_2djxi")
+small_building_scene = ExtResource("5_i2x4l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2

@@ -584,25 +584,23 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5pi0r"]
-radius = 4.0
-height = 14.0
+radius = 3.0
+height = 6.0
 
 [node name="Unit" type="CharacterBody2D"]
 z_index = 10
 script = ExtResource("1_5pi0r")
 
 [node name="Pig" type="AnimatedSprite2D" parent="."]
-z_index = 2
-sprite_frames = SubResource("SpriteFrames_2l1pa")
-animation = &"splash"
-frame = 6
-frame_progress = 1.0
-
-[node name="Sheep" type="AnimatedSprite2D" parent="."]
 visible = false
 z_index = 2
+sprite_frames = SubResource("SpriteFrames_2l1pa")
+animation = &"down"
+
+[node name="Sheep" type="AnimatedSprite2D" parent="."]
+z_index = 2
 sprite_frames = SubResource("SpriteFrames_mao6n")
-animation = &"splash"
+animation = &"right"
 
 [node name="Penguin" type="AnimatedSprite2D" parent="."]
 visible = false

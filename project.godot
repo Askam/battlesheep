@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="BattleSheep"
-run/main_scene="res://scenes/battle_scene.tscn"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+run/main_scene="res://main_menu.tscn"
+config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 MultiplayerManager="*res://MultiplayerManager.gd"
+GameConfig="*res://scenes/scripts/game_config.gd"
 
 [display]
 
