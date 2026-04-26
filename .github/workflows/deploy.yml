@@ -25,7 +25,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: rm -rf /var/www/needaname/muxxu/battlesheep/*
 
       - name: Upload build to VPS
@@ -33,7 +33,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: ./build/Web/*
           target: /var/www/needaname/muxxu/battlesheep/
           strip_components: 2
