@@ -27,6 +27,8 @@ var drag_line: Line2D = null
 var _game_over := false
 var _game_check_timer := 0.0
 var _game_start_timer := 2.0  # grace period before checking end condition
+var _pause_menu_open := false
+var _hud_layer: CanvasLayer = null
 
 func _ready():
 	var ai_races: Array = []
@@ -46,10 +48,11 @@ func _ready():
 			spot.owner_changed.connect(ai_controller.on_spot_owner_changed)
 		spot.box_opened.connect(on_box_opened)
 
+	_setup_hud()
+
 func _process(delta: float):
 	if is_dragging and selected_spot != null:
-		var mouse_pos = get_viewport().get_mouse_position()
-		drag_line.set_point_position(1, mouse_pos)
+		drag_line.set_point_position(1, get_global_mouse_position())
 
 	if not _game_over and GameConfig.num_players == 1:
 		if _game_start_timer > 0.0:
@@ -155,6 +158,94 @@ func _show_end_screen(victory: bool) -> void:
 		get_tree().change_scene_to_file("res://scenes/solo_setup.tscn")
 	)
 	hbox.add_child(menu_btn)
+
+
+func _setup_hud() -> void:
+	_hud_layer = CanvasLayer.new()
+	_hud_layer.layer = 10
+	_hud_layer.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(_hud_layer)
+
+	var pause_btn := Button.new()
+	pause_btn.text = "≡"
+	pause_btn.custom_minimum_size = Vector2(44, 44)
+	pause_btn.position = Vector2(10, 10)
+	pause_btn.pressed.connect(_show_pause_menu)
+	_hud_layer.add_child(pause_btn)
+
+
+func _show_pause_menu() -> void:
+	if _game_over or _pause_menu_open:
+		return
+	_pause_menu_open = true
+
+	if is_dragging:
+		if selected_spot:
+			selected_spot.set_selected(false)
+		if drag_line and is_instance_valid(drag_line):
+			drag_line.queue_free()
+			drag_line = null
+		for s in $SpotContainer.spots:
+			s.set_target(false)
+		is_dragging = false
+		selected_spot = null
+
+	get_tree().paused = true
+
+	var canvas := CanvasLayer.new()
+	canvas.layer = 30
+	canvas.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(canvas)
+
+	var dim := ColorRect.new()
+	dim.color = Color(0.0, 0.0, 0.0, 0.5)
+	dim.set_anchors_preset(Control.PRESET_FULL_RECT)
+	canvas.add_child(dim)
+
+	var center := CenterContainer.new()
+	center.set_anchors_preset(Control.PRESET_FULL_RECT)
+	canvas.add_child(center)
+
+	var panel := PanelContainer.new()
+	center.add_child(panel)
+
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 16)
+	panel.add_child(vbox)
+
+	var title := Label.new()
+	title.text = "Pause"
+	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	title.add_theme_font_size_override("font_size", 36)
+	vbox.add_child(title)
+
+	var resume_btn := Button.new()
+	resume_btn.text = "Reprendre"
+	resume_btn.custom_minimum_size = Vector2(200, 48)
+	resume_btn.pressed.connect(func():
+		canvas.queue_free()
+		_pause_menu_open = false
+		get_tree().paused = false
+	)
+	vbox.add_child(resume_btn)
+
+	var replay_btn := Button.new()
+	replay_btn.text = "Relancer"
+	replay_btn.custom_minimum_size = Vector2(200, 48)
+	replay_btn.pressed.connect(func():
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://scenes/battle_scene.tscn")
+	)
+	vbox.add_child(replay_btn)
+
+	var menu_btn := Button.new()
+	menu_btn.text = "Menu"
+	menu_btn.custom_minimum_size = Vector2(200, 48)
+	menu_btn.pressed.connect(func():
+		get_tree().paused = false
+		get_tree().change_scene_to_file("res://scenes/solo_setup.tscn")
+	)
+	vbox.add_child(menu_btn)
 
 
 func create_drag_line():
